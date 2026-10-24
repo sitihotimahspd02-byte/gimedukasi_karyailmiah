@@ -1,0 +1,1 @@
+# gimedukasi_karyailmiah
