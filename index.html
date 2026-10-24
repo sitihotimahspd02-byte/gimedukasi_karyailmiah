@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ekspedisi Naskah Nusantara</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&family=Public+Sans:wght@400;600&display=swap">
+<style>
+:root{--bg:#e7edf0;--panel:#f8fafb;--ink:#0f2230;--mute:#4d6371;--sea:#14707a;--gold:#c98f10;--ok:#1f7a4a;--bad:#b3402e;--line:#b9c6cc;--on:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a22;--panel:#14262f;--ink:#e6eef0;--mute:#9db3bd;--sea:#4fc1c9;--gold:#e5b84a;--ok:#5cc98a;--bad:#ef8a76;--line:#2c4551;--on:#0d1a22}}
+:root[data-theme="dark"]{--bg:#0d1a22;--panel:#14262f;--ink:#e6eef0;--mute:#9db3bd;--sea:#4fc1c9;--gold:#e5b84a;--ok:#5cc98a;--bad:#ef8a76;--line:#2c4551;--on:#0d1a22}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Public Sans",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15;margin:0 0 8px}
+h1{font-size:2rem;font-weight:800}h2{font-size:1.4rem}h3{font-size:1.1rem}
+nav{display:flex;gap:8px;margin:12px 0}
+nav button{flex:1}
+button{font:inherit;cursor:pointer;border:2px solid var(--ink);background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:10px;text-align:left}
+button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button.pri{background:var(--sea);color:var(--on);border-color:var(--sea);font-weight:600;text-align:center}
+button.on,.opt.on{background:var(--ink);color:var(--bg)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.panel{background:var(--panel);border:2px solid var(--ink);border-radius:14px;padding:16px;margin:12px 0}
+.stat{display:flex;gap:16px;flex-wrap:wrap;color:var(--mute);font-size:.9rem}
+.opt{display:block;width:100%;margin:8px 0}
+.ok{border-color:var(--ok)!important;box-shadow:inset 6px 0 0 var(--ok)}
+.no{border-color:var(--bad)!important;box-shadow:inset 6px 0 0 var(--bad)}
+.fb{border-left:6px solid var(--gold);padding:8px 12px;margin:12px 0;background:var(--bg)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;min-height:44px;padding:8px;border:2px dashed var(--line);border-radius:10px}
+.chip{padding:8px 10px;border:2px solid var(--ink);border-radius:8px;background:var(--panel);cursor:grab;font-size:.92rem}
+.chip.sel{background:var(--gold);color:#111}
+.bk{margin:10px 0;border:2px solid var(--sea);border-radius:10px;padding:8px;min-height:60px}
+.bk b{color:var(--sea)}
+.row{display:flex;gap:8px;align-items:center;margin:8px 0}
+.row>span{flex:1}
+select{font:inherit;max-width:50%;padding:8px;border:2px solid var(--ink);border-radius:8px;background:var(--panel);color:var(--ink)}
+.ord{display:flex;gap:8px;align-items:center;margin:6px 0;padding:8px;border:2px solid var(--ink);border-radius:8px;background:var(--panel)}
+.ord span{flex:1}.ord button{padding:4px 10px;text-align:center}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--sea)}
+svg{width:100%;height:auto;max-height:520px}
+svg text{fill:var(--ink);font:600 13px "Public Sans",sans-serif;paint-order:stroke;stroke:var(--bg);stroke-width:4px}
+.node{cursor:pointer}.node circle{fill:var(--panel);stroke:var(--ink);stroke-width:3}
+.node.lock{opacity:.45;cursor:not-allowed}.node.done circle{fill:var(--gold)}
+.node:focus-visible circle{stroke:var(--gold);stroke-width:5}
+summary{cursor:pointer;font-weight:600;padding:6px 0}
+table{border-collapse:collapse;width:100%;font-size:.9rem}td,th{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}
+.wide{overflow-x:auto}
+html{background:#07210f}body{background:transparent}main{position:relative;z-index:1}
+h1,main>p,#stage>p.stat{color:#f3f7dd;text-shadow:0 2px 8px #000b}
+h1{font-size:2.3rem}
+.panel{border-color:#7fb069;box-shadow:0 10px 28px #0007}
+#scene{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;--t1:#0b2e1a;--t2:#14472b;--t3:#2a6b45;background:linear-gradient(#12384a 0%,#3b8f6e 55%,#e0b867 100%)}
+#scene.s1{background:linear-gradient(#1d5a78,#6fb8c4 55%,#f0d28a);--t1:#0e3b3a;--t2:#1b5a50;--t3:#3c8575}
+#scene.s2{background:linear-gradient(#07210f,#1f5a2c 55%,#8cc152);--t1:#04170a;--t2:#0d3a1a;--t3:#1f6330}
+#scene.s3{background:linear-gradient(#120d1c,#2b2140 55%,#6b4a2e);--t1:#0a0710;--t2:#1b1428;--t3:#3a2c44}
+#scene.s4{background:linear-gradient(#080c24,#1d2a5c 55%,#5a4a8a);--t1:#05071a;--t2:#10173a;--t3:#26346b}
+#scene::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(105deg,#fff0 0 90px,#ffffff16 90px 135px);-webkit-mask:linear-gradient(#000,#0000 70%);mask:linear-gradient(#000,#0000 70%)}
+#scene.s3::before,#scene.s4::before{opacity:.25}
+#orb{position:absolute;top:7%;right:10%;width:100px;height:100px;border-radius:50%;background:radial-gradient(#fff6c8,#f6d36b 52%,#f6d36b00 72%)}
+#scene.s3 #orb{opacity:.2}#scene.s4 #orb{background:radial-gradient(#fff,#dfe6ff 52%,#dfe6ff00 72%)}
+.mist{position:absolute;left:-20%;width:140%;height:30vh;bottom:16vh;background:radial-gradient(ellipse at center,#ffffff33,#fff0 70%);animation:drift 40s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translateX(12%)}}
+#scene svg.tr{position:absolute;left:0;bottom:0;width:100%;max-height:none;background:none;border:0}
+#scene svg.tr path{fill:var(--c)}
+.ff{position:absolute;width:6px;height:6px;border-radius:50%;background:#f7f08a;box-shadow:0 0 10px 3px #f7f08a99;animation:fl var(--d) ease-in-out infinite alternate,bl 3s ease-in-out infinite;animation-delay:var(--l),var(--l)}
+@keyframes fl{to{transform:translate(var(--x),var(--y))}}
+@keyframes bl{50%{opacity:.15}}
+@media(prefers-reduced-motion:reduce){.ff,.mist{animation:none}}
+#stage svg{max-height:680px;background:#06281a99;border:2px solid #7fb069;border-radius:16px}
+#stage svg text{fill:#f6f9e4;stroke:#06281a}
+#stage svg path{stroke:#e0b867;stroke-width:6;stroke-dasharray:2 12}
+.node circle{fill:#1d4a2e;stroke:#e0b867}.node.done circle{fill:#e0b867}
+#scene.s5{background:linear-gradient(#2b4a7a,#e58f6a 55%,#f6d36b);--t1:#0b2418;--t2:#173d2a;--t3:#3b6b55}
+#scene.s5 #orb{width:160px;height:160px;top:12%;right:calc(50% - 80px)}
+input,textarea{font:inherit;width:100%;padding:8px;margin:4px 0 12px;border:2px solid var(--ink);border-radius:8px;background:var(--panel);color:var(--ink)}
+label{display:block;font-weight:600}
+.big{font-family:"Bricolage Grotesque",sans-serif;font-size:3rem;font-weight:800;line-height:1;margin:8px 0}
+.rate{display:flex;gap:8px;margin:6px 0 14px}.rate button{flex:1;text-align:center}
+nav{gap:10px}nav button{display:flex;align-items:center;gap:10px;padding:8px 12px;border-color:#7fb069;box-shadow:0 4px 14px #0006;transition:transform .15s}
+nav button:hover{transform:translateY(-2px)}
+nav button.on{background:linear-gradient(135deg,#1f6b3a,#12401f);color:#f3f7dd;border-color:#e0b867;box-shadow:0 0 0 3px #e0b86766,0 6px 16px #0007}
+nav button b{display:block;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.05rem;line-height:1.1}
+nav button small{display:block;font-size:.75rem;opacity:.8;margin-top:2px}
+.ic{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:50%;background:#e0b867;color:#111;font-size:1.35rem;box-shadow:inset 0 -3px 0 #0003}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.tags span{background:#06281acc;border:1.5px solid #e0b867;color:#f3f7dd;border-radius:999px;padding:3px 12px;font-size:.85rem;font-weight:600;text-shadow:none}
+.gd h2{font-size:1.7rem;border-bottom:3px dashed var(--gold);padding-bottom:8px;margin-bottom:12px}
+.goal{border-left:6px solid var(--gold);background:var(--bg);border-radius:0 12px 12px 0;padding:10px 14px}
+.gd details{border:2px solid var(--line);border-radius:12px;padding:4px 14px;margin:10px 0;background:var(--bg)}
+.gd details[open]{border-color:var(--sea)}
+.gd summary{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:1.1rem;font-weight:800;padding:8px 0}
+.gd li{margin:6px 0}.gd li::marker{color:var(--gold);font-weight:800}
+.gd th{background:var(--sea);color:var(--on)}
+.qt{display:inline-block;background:var(--sea);color:var(--on);border-radius:999px;padding:3px 14px;font-size:.8rem;font-weight:700;margin-top:12px}
+.stars{font-size:2.4rem;margin:0}.stars span{display:inline-block;color:var(--mute)}
+.stars span.on{color:var(--gold);text-shadow:0 0 14px #e0b867aa;animation:pop .6s both;animation-delay:var(--d)}
+@keyframes pop{0%{transform:scale(0) rotate(-90deg);opacity:0}70%{transform:scale(1.4) rotate(10deg)}100%{transform:scale(1);opacity:1}}
+.cf{position:fixed;top:-16px;z-index:30;width:9px;height:14px;border-radius:2px;pointer-events:none;animation:cf var(--t) linear forwards}
+@keyframes cf{to{transform:translate(var(--x),108vh) rotate(var(--r))}}
+main{padding-top:80px!important}
+.sndbtn{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);left:12px;z-index:20;width:62px;height:62px;border-radius:50%;padding:0;text-align:center;font-size:1.6rem;line-height:1;background:var(--panel);border:2px solid #e0b867;box-shadow:0 4px 14px #0008}
+.badge{position:relative;display:inline-flex;align-items:center;gap:10px;margin:10px 0 14px;padding:10px 24px 10px 12px;border-radius:999px;background:linear-gradient(110deg,#c98f10 30%,#ffe9a0 50%,#c98f10 70%);background-size:250% 100%;color:#1a1200;border:2px solid #fff3c0;box-shadow:0 0 18px #e0b867aa;animation:shine 2.4s ease-in-out infinite,drop .7s cubic-bezier(.3,1.6,.5,1) both}
+.badge .bi{font-size:1.8rem}
+.badge i{position:absolute;font-style:normal;font-size:.95rem;animation:tw 1.6s ease-in-out infinite;animation-delay:calc(var(--a)*.5s)}
+.badge i:nth-of-type(1){top:-10px;left:18%}.badge i:nth-of-type(2){top:-8px;right:10%}.badge i:nth-of-type(3){bottom:-8px;right:42%}
+@keyframes shine{to{background-position:-150% 0}}
+@keyframes drop{0%{transform:translateY(-30px) scale(.5);opacity:0}}
+@keyframes tw{50%{transform:scale(1.6) rotate(20deg);opacity:.4}}
+.cb{position:fixed;top:28%;left:50%;transform:translateX(-50%);z-index:40;font:800 2.2rem "Bricolage Grotesque",system-ui,sans-serif;color:#ffe9a0;text-shadow:0 0 18px #e58f6a,0 3px 0 #7a3b00;pointer-events:none;white-space:nowrap;animation:cbk 1.2s ease-out forwards}
+@keyframes cbk{0%{transform:translateX(-50%) scale(.3);opacity:0}25%{transform:translateX(-50%) scale(1.3);opacity:1}100%{transform:translateX(-50%) translateY(-60px) scale(1);opacity:0}}
+.sndbtn.mu{left:84px;opacity:.6}
+@media(prefers-reduced-motion:reduce){.badge,.badge i{animation:none}}
+@media(prefers-reduced-motion:reduce){.cf{display:none}.stars span.on{animation:none}}
+.story{border-left:5px solid var(--gold);padding:6px 12px;font-style:italic;background:var(--bg);border-radius:0 10px 10px 0}
+
+.devbtn{position:fixed;top:calc(env(safe-area-inset-top,0px) + 10px);right:12px;z-index:20;width:62px;height:62px;overflow:hidden;border-radius:50%;padding:0;text-align:center;font-size:1.3rem;line-height:1;background:var(--panel);border:2px solid #e0b867;box-shadow:0 4px 14px #0008}
+.devbtn img{width:100%;height:100%;display:block;object-fit:cover;transform:scale(1.08)}
+.dev{position:fixed;top:calc(env(safe-area-inset-top,0px) + 82px);right:12px;z-index:20;width:min(290px,calc(100vw - 24px));background:var(--panel);color:var(--ink);border:2px solid #e0b867;border-radius:14px;padding:14px;box-shadow:0 12px 32px #000a;text-align:center}
+.dev[hidden]{display:none}
+.av{width:150px;height:150px;border-radius:50%;overflow:hidden;margin:0 auto 12px;border:4px solid #e0b867;box-shadow:0 0 0 3px var(--panel),0 6px 16px #0006;background:#000}
+.dev .av img{width:100%;height:100%;display:block;object-fit:cover}
+.dev p{margin:2px 0}.dev .nm{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:1.15rem}
+.dev .sm{color:var(--mute);font-size:.85rem}
+</style>
+</head>
+<body>
+<div id="scene" aria-hidden="true"><div id="orb"></div><div class="mist"></div></div>
+<button class="devbtn" id="dvb" aria-expanded="false" aria-controls="dvc" aria-label="Profil pengembang" onclick="devT()">🖋️</button>
+<aside class="dev" id="dvc" hidden><div class="av"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAFAAUADASIAAhEBAxEB/8QAHAABAAEFAQEAAAAAAAAAAAAAAAQBAgMFBgcI/8QAQRAAAQMDAQUFBQcDAgUFAQAAAQACAwQFESEGEjFBURMiYXGBBxQykaEVI0JSYrHBctHhM/EINEOC8BYkJTVEU//EABwBAQACAwEBAQAAAAAAAAAAAAABAgQFBgMHCP/EADQRAAICAQIDBgMIAgMBAAAAAAABAgMRBCEFEjEGEyJBUXEUobEyQmGBkcHR4QcjFTNigv/aAAwDAQACEQMRAD8A16Ii4TJ+kAiDiqpkFEVUTIGqaqqJkFNVac5V6omQWjPNMK5FOQURVRRkFuEwrkU5IwUVMK5EySURVRRkFEVSgTIKIqomQUVMK5EyC3Cu1RVTIKapqqomQU1VFcqJkFFQhXImQUCKqJkFEVVRMgIiIAiIgCZREAymURAMplEQDKZREAymURAMplEQDKZREAymURAMplEQBERAMplEQDKZREAymURAMplEQDKZREAymURAMplEQDKIiAIiIAiIgCIiAIiIAiIgCIiAIiIAgRBxQFcKiqqY1QYCpqrZZY4/jcM44KI+tP4QAsqjRXXLMVt6mk4j2h0HD3y2zzL0W7/r8ybqmfFat9TI78Z9FjMhPEn5rPjweXnI5e3/ACBWn/rob93j9mbka8wmCtLvnqfmrmTysxuyO+aS4PL7siKf8gVN/wC2hr2af7I3GEWsZcZWDDmNeOvAqVDWwTYBPZu6O/usK3QX1buO34bnSaDtRwzXNRhZiXpLb+vmSUQDxVcLDOgKIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiKhOASToFI2SyyhIAJc4ADmVBqa/i2F2Bzd/ZRK6tMzi1pxGOA6qC+XxW90fDUkp29fQ+W9ou2Fl0np9E8RWzl5v29ETZJs6k5PVY98HmoJmwVWOUkrc42wcE93lk7KpvKxjshXDghALla55VxxhYnkKQVMhCp2nksL34VnaqCMGxo6+WncASXx82nl5LdU1RFUR78Ts9RzHmuU7UK+nq3wTiWN264cRnRw6Fa3V8Phd4obS+p13AO1l/D5KrUNzr+a9vw/A6xFHoKuOrgErNDwc3m0qQucnCUJOMluj69RfXqK1bU8xfRhERVPUIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIUBQrVX2s3MU0Z1Iy8+HRbOWRsUbpHkANGSuNqal0sj5XnvOOVs+GUd5ZzvovqcX214rLSaRaet+Kz6ef6mR8uVidIcKOZM41QvyOK6Q+SJFXv7yzQPyovFykQtPJGGT436ZWdrxjVamsraaiiMlRKG4HDK5K67ZVb3GO3NDW//wBCNVVzS6hLJ6ITlpwsL15Y6+X5zt818o58dFs7ftdcoXNFa1tRH5YI9VVXRbJcWjuHjio8hwsVvu1HcIwYJAHHiw8VkmKv16FSwyEK0yarBK7CxGTXigNnb66SkqWzMORwc3k4Ls6aaOop454jlkjd5pXnPaeK32x1xIqn26R3dkBfF4EcR/K1XFNKpw7yPVfQ7bsXxp6XUfB2PwT6fg/7+p1mUVg+JXhc8fWgiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCoVVUKIlGo2pn7K3iIHDpXfQcVyDp98906LZbb1wNV2bXaQt3MfqPFc9HLgAArp+H193Ss+e58R7V634zilmHtHwr8uvzJrpcDGVUyNGNcqIH65zoqscXPBxzxjqs4542VEwzPydGhYb9doLdCWtcC/Gp6LDcbgy2URZvfebuSemVwc0s94uPZhzjGHd7HPw8gqzmoptl4VucsImGSe91LpJi4Q57jR+LzXQ0FmpRumSMkY4DRbLZfZ/LWEtPJdhBYCGHu6+S01uqlOWxvadFGKwzjXW6i3N33Z4HooVVY6WUHcduE8MhegOso3cEa+SjVdmIjcQ3kvON0kektJD0PLKmhq7ZKZ4CDuHUMdrjqt/Zry2viDZHASfup17teASQQ4DQrhqyKa31PaMJAJys/S6lN8sjV6rROHiidpUSYUYvOVgtlcyvp9SBKBqOR8VkOhwVska0yb/AIq33qSlqIqqI4fC4Pb6LGSscjgQclRJZWCI2Srkpxe63R6vTTx1NLFUxuBZKwPb6rK3kud9n1QZ9mo43EF0EjovTOR9CuiHJcddW67HB+R+heH6r4vSV3r7yTLkRF5GYEREAREQBERAEREAREQBERAEREAREQBERACsFbO2lo5ql/CJhd8lmJXMe0Gv7Cghomuw+eQF39I/yvfT1O2xQNfxbXLQaKzUPyW3v5fM4u91T5ahpe7vPdvOHiqMIDBrqtfXv3rnEzOeKmE4Yc9F1mEtkfAOZy8Unuy6SU91o0z+yl072RtfLIMtjGTrxPRa0OzJvk6Narb3U+70kcDDhzhvu/hTnCLI0+0NdLUT9kxxL3HQDr1XUbE2Lsow+RmXEBaHZK2m4XJ1U9u8waNyvY9m7UAGZjWn1t2XyI3vD9NyrmkbGx2/s2NIaOHyXQx0wI1YFJt9Bhjcsxop7aRzRwWGlg2exqH0bSOAAUCspGgnUYPRdKIWlpGM64Uaopcg4jGPJGiU0ee3yiZICPDQrz3aC3NfG5pbqPBex3Ohdh5LRr4LhtoKHG8N3QqkZuLIsrUo4Z5TRTPt1w3MnGfmOi6aSRrmtladCM5Wl2nouz+/YMOaclXWaq7SB0DjvDG83PQ8l0Omu54HLaunup4Ns94IwFge7xWJspwWu5aKx7lk5MNo7X2Vz5Zc4OQla/6YXbA66Lz32Uyf/I3Nn5msI9Mr0FvFctxBY1Ej7Z2Qsc+E1Z8sr5syDgiDgiwTpgiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIioUBQkAEk4A4leU7WXL7Qvvatz2e/uM/pC7rbO4CjtZgaSJajLRjk3mvKK+fdudO06AvW94Vp2k7X+R8w7ecU57IaGD2W8vfyX7lagk36Jv6SVPlfhjv6VrpyPt2mPVrv2U2XvNx1w36ras+fxRkpm/AHDGRvknwWgus0lbWEMyXSuw3wH+y3FfN7vSzvyMuxG3yH/hWLYS0uulzdUPaSxpw3+687pqEGzJ09fPNI7nYO2wRRQxcGt4uxxK9bsNNSjdxK06Lh4LMyKmAE5Y4Dlpqqxtq6Qjspntxza/itHs22dFBNLB63D2TGjvAgLI58Z4ALza23W4teGvl3wV1VkrHS5EmpxxUc25flZutxu/nAx1VXxxuGhyVHklA1zhQK25Ng+JwB5YU5RKiyTXUUcrCRpouN2hs/ce4Z4KdXbXR0jsOhdLnoVBdtjRVIMclNJHngXAcVVx5iefHU8q2nt/xtc3Q+C4Skc6jri12gY7HoV7JtJLDVRvPZY0JBC8j2ihENwc5vB7c/VZ2ik4ywzV8RgpxUkTpXASDB0dr6hUecjKjtk34Y5MccZ/ZZC7uE8cBbfOxopGz2Juf2de21Gfu3v3JP6TovYm7p1Bz0K8FpDuxMcdATr6r2DYq4e/2KHfcDND92/04H5LS8Vo2Vq9j6H2B4liU9FN/+l+5vAVVWq4LSH00IiIAiIgCIiAIiIAiIgCIiAIiIAiIgCtzgZVStXtRXe42iVzT95J92zwJ5q9dbskorzPDV6mGkonfZ0isnF7VV/2hdpHNdmKPuR+Q5+q4XaBxbVRvzg74K6J7svwua2p0LD0cuwqrVcFFeR+fNTqbNXdO+zrJ5J9R/wDa0T+rnN+ingtDw48G6466Ba6c/e0Txynac+YIU+Yd5wPXH7KH1KQNVtHKWQxw5zxOPE6D+V09gqfsS0wxM7sztXHGXZPIDmVztvonXfaqGnZ8DDvOPgNP4K9Ip9nGMuEL35Oc5LuS1uttWVBm44dQ2nNGiu18r6Cup6Blro6uunY17venF/Zhxw3JcQ0Z9AFtbTVz1tVX0ctBT0tXQsD5prbLvx7p0zu8Dg8cLcbVez6W+zNrYamOmmdCIXl7C+N7RnB01B1xwU/2abKx7GCsnq5oaqeoZ2QERwxjM5PxakkqP9Dr6bnso6lWbboutFU5zAJd3tG4O83g8ciF22z7C+MPbqDzXMWq1UvvkxO5HTSAuaGytd2bs8Bg8D06rs9ioT2DmHUNcRnqtbjc2slyxMtS1wGoK5LaCZwkAzqV6VcqMNpi7AC8xv8ARvnuEvfDWRjLieCWRaK1vmNBWOpg4OqJ90uOg4knwAWaipKF7e2kp617eAPYH/dVsNlFzqZaieURxMa4sia7EkuBkAn8I4cF5RJcLbHQ1ba2O5S3SZ7jFOysMbKY8gWYOcHx4LK0+mdi64MTU6hVPHLk9blhtNSx0dPOHObxadHDzB1XlvtCtrIHOlY3dwc6c1uWm5U+zlrulTUSTiePO+7PaRanDgebSORULamYXC2B+QXFvex1URTqtWWUsxdU2kcjRuJo8c25P8rLK77o45hQ7Y4uheOmP5WaUklrc8cFbxM5mS3wSYxmlcOOACu09mld2VzdSOd3Khmg/UNR/K46kAO+3kRhTLHVOo6qCpae9E8O+SjUVK2qUTN4TrHodbVevJ7+3R/I9pGeauCxxyMkjZIw5a9ocD4ELI05XHbrY/QSaayiqIiEhERAEREAREQBERAEREAREQBMIqoC3Gq4Lbiu94uhp2uzHTjdwPzc13FwqW0dDPVvxiJhdrzxwXk88rpnvlee88lzvMrb8KpzN2PyOB7ecRdWnhpIvee79l/L+hga7eqCPDK5/a4YhDvErfQ/8w7+k/utJtYM0q6BI+WIvL80UEn5ezfnyctrPhsj+jST9MrQ0snaWiHmXQYHphbWpmDqV0h/FHn6f5XlLYujqvYdajWXKvr3N3uzDImk+PeK9xisTZqcZi15aLkP+G2xF+ybK18eTVTvk9Ad0fsveKK3RsYBugLR3J2WtnUadKqqKPLp7BcWjFPPLGOnHChO2Zq5pM1VVNL+ngF7PJbYH/E3RRpaCmiyWsaT1wq9w0t2e3xT8keaUGyzt4N7N0bBxxouxsFsbSsEYaMZ1WyeG74bpk8FNt8OZW4CiMNykrcrcj3an3qYNA4grzm92KSWSR8W8CTnIXrtxpz7vnd4LkKqINldprlelsClMzyid13tk5dJC2pj6hg3h/dQp4dmq+U1FbaaDtn5LnSUYD8+PVe0SWCCuhDwA12PmtZJsWwaln0XlyWR+yZDtqn9pHlF4ZS18ApqSF8oADQQMNA8lzl62dFJQl3ZhumoXvA2WbF8IA/7VzO21kAoJAASQ06ELzakt2Q3GWyPlWkHZ1lTHjAbIRj1V+c1DR0YMrLXR9jtBcIukpUeMjtJHfqwPJdDW8pHJXR5bGjZ0JySOayxjdkeMc1ht3+oVJf3ZieoWQmeLR6lsXU+9bOUznOy+LMTvTh9MLdsXE+zGoJ99pCfyytH0P8AC7Zq5PW1d3dJH3fs7q/i+G1WPrjD/LYvREWIbsIiIAiIgCIiAIiIAiIgCIiAIUVQiJRx3tSuPu1rgoo34kqJMkfpb/nC4iB5fECeYUn2jV5rNqZ2tOY6Zohb5jV31Kg0B3qdp6aLqNBX3dSTPhvafW/GcTskukfCvy/vJkjOKwDqxwWp2kbmkeBroVs2HFaw9SR+6iXZodE9p6fws9GgNDaJM22Efke5p+S29c8NoZB+QFv1XPWV+GVMHNrw4fsf4W/pYzVyxUgH+tURR8ebiAVSxF4LLSPsT2PWdtq2Fs9PgBzaSMu8yMn9130W61vHVc3bJG0tLHCw4bG0NHkNFMbcmDQuC0cZLOWdO02biSUAY6rV3Go7PfcXAt0wANQolVd2Nb3XAlasVUle87h3sdFMpp7ImNeN2TbbLJW1buzaSI8by7K0UjGgOl7pPVcbZdoLLs7aZpLhLHG4Pc6VzzgDBWmp/a3abnVvbapmyNZxBa5unUZGoSEoR3YnCc9oo9dqIIjEe8Oi8125fU2uT3yKnfNThw7UtHwN6qPN7R4WNOug45OAFItPtB2au8D6d9ZTSyYxIxrwfRTO2ua2ZSFNlby1k2Ozdyhq6Rr4nAtOoXQxua5uuF5vZZYqCpkZEXCn3yYv6SdF19LdGdnnPzSE10ZNtW+UbSpja4cAuR2poxJTS5byK3j7iCD3hhaW81jTTvHH1VbcOJFalFo+MtsYhTbc3iJrcBsx09AtRFjQDhlbj2jPDvaPfC05AnI+gWlpxqNVtqF4Ec/qf+2XubS3nEhUuYatKh0Qwd7llTZvhb5rJRjM3/s/nMO0cTOUrHMPyz/C9KC8o2TeWbR0BHOXHzBXq/Nc9xaOLk/wPrXYOxy0E4Pyk/mkZAqqgVVqTtwiIgCIiAIiIAiIgCIiAIiIAsNdUNpKKapf8MTC5Z+a5vb2s7G3spQdZXZI8AvfT1d7Yoepr+La1aHRWah+S29/L5nnF0b28z5XfE4lx81Zbx9w4DqVkqnDeWOi0EoPDIPzXXJJH5/y28vqyyR27VxHkHj91SvbvB7fNYrgSzD+TXAqZUtBeQeaugcNCW017IcMMkJafXn811Gy7gNpbcJHYYa6nLvAb4/sua2jhdHUh505LYUtS8xwV0TsSDBPg9pyPqFSxZReuWJI+3KyQxNcd7AyVqX1E+XFr8jkMKlsutPfNn6O4QuBiq4GSgjxGSPnkJGWtIYDryyuZllbHXQw1khzVMz3GMvxyXTbPPpqaFoa7L8d44XJXSE08wqnjLGNJ0PBQbPtranTujdXU8RacEOeAkW0y01zLCOj2tsFNdKozse5rX/G38Lj1wtJ/wCk4Rulji0t1BAAW0dtdYjGP/fNcejAXLBSbbWF83ZSPmjGcb7ozhS92TFTSwaG5bGMlbmonlmZ+Rx7vyWOxbLCGua98zI4WnJYyMAnwytxedsrAZOwpZ3vAPefuHHoo8e0dmDciuhB/Ud3905S2ZpHR3+qiZRxugaMxgAY6KBbr+HxDXQdFy8u1tumuIpYaynlLuTHhy2VDQOlkmlgH3RIIHTqolJplYrbc6F96B4OKh1dW+aJ5LiBg81rHMwVD2juUdq2drq6QjEED3jXiQNB88IpOTwVniKyfNu0VV75tRc6oHPa1Uh9N4hYqcfuokBc5xe/V7jknxPFToBwXRwjjY5Gb5pNmxo9AApE3wjwUek4KTL8K9jyZtNi29ptNQjGQ15cfQFert4ryrYN7WbT0u9+LeaPPC9VbxXOcWebl7H1rsHGK0E2urk/ojIOCIOCLVHbhERAEREAREQBERAEREARFUhAAvOtsat1RdpgTlsX3bPIf5Xe3GoFLQTVDjjcYSPE8gvK7hK5znFx7x1K3PCasydnofPu32t5aq9JF/aeX7Lp8/oauoOXaqlIe88Z4tz9VSfBKto/+ZAzxaR9FvUfMUW3Ru9AWnhgrLTP94pIZQcl0Y+apUjfhJKgbOz70M1K49+GQ4z+UlWDRE2opxJB2g5ahaayVID300mjZB3c9V1t0g7WneAcaZHkVw1Q0xVBABBafkUxkI+iv+HzaLtLbU7N1MnfpHGamyeMTjqPR37r1KR4cQQcYXyVspfai1XWku1Ifvqd4c5v528HN9QvqPZ66Ul5tdPXUkgfFPGHt6jwPiOC0Otp5J83kzoeHXqdfI+qN9FCy4R9jJ8LhgrSV+wFtawMihY3Dy+N2ODl0dkZq3HDK3tTDvQnTOFiRXmZ7m4vY8sbs4ztTTTVU1CcYY4MD2Z8f8KDctlqmmlDG3W3z73AlpGnodPULvro/ulrmA44ZC56qnBdrBHvdSNVdyiZldqfU5yl2XfMe0kvFFFG3juRE5+ZUyj2GorpMYg6SeEHL5JGgN9AFtKWNk0o3oWABdPRzdnEIo2kBTFplbrUl4SFJsbY4aGKGGihjFP3mFrADvdcrA2X3GJ0IZgjguohgkkjHaAhvFcztU5rJSc7vIYVJoxIS8jVSTjJJ5ryr247QtNFDYqeTL5nCScDkwHQep/ZdZtPfqazWqauqHuIYO60cXHkB4rwK41tRc7lNX1Tt6WZ+8eg6AeAWVoaXKXO+iMDiGp5I8i6sthb4KZACCrKWM8SpkUa3UdzQGalUh4ywrHC3dCyngvQqzPs7MKe+0MxOA2ZufU4XsgGq8MY4tmaW6EOzle20EomooJw7eEkbXZ65C0PGIYlGR9K/wAf35hdT6NP9diSERFpT6MEREAREQBERAEREAREQAKpVE5oiUc7tzViOiipGnvSu3nf0j/K8/rXZJW+2prfe7pLI34GdxvkFztS4krq9DT3VKXn1PhfaXX/AB3EbLE9l4V7IhSlYoXhlRG48iFln4qJKcOaVmGjRsKhuGyM8cDyXMtnNDfC92kb9D4LqHESNEg1D25Pn/4Fym08WJA7JyUYOoY4SRnJ0HFcrtDRGKftA3Q8SpNguuWbk2pYMEdR1W4uNPFX0ncIOQdRxVctDBxVHKYpcZwCV6X7Jttjs/cDbq6QigneCHE6QvPP+k8+nHqvNKiF8FQ+GQYew4Pj4rNG7ebnmPqvO6pWxxI9qLpVTUkfaViuzC5hDw5p4YK7uheyojBHNfG3s79oMtqEduucrjTDAilOpj8HeHjyX0ZsTtZBU0rPvw8YBDmuyCOoK0sqZUyxI6Gu6N0cxO7qrXBOSHNx0K1s2zVO45ErvVoU2G8Uk4BZO0u5gLKbjA0Yzkq3LF9S6ckamPZiFjwe1J8MKfTWiGndvuIcBwCvfWgjIcwDrla2puzWlxfMNwDqjUUW8TJtxrIYInEuHDQLyra6+xSTyEvayOMEvcTgDCv272wjgY+OOVrcDJdnRo6rwLbLamW6udRUkjhSZ+8dzlP9v3VYVStlhdDxtujp48z6kbbfaKXaK6ZY5wooTiFp5/q9VqYGEkKyGNT6aLmVuIRUIqMTnrbZWS5pGanjwFNiaFhZjwUhjgOa9keTLwFdyVA4HmqqxVkU6VQb6r1fYOq962diaT34HGM+XELyioz72zyXZezqv92uXu0h7lS3dHg4cFgcSqdlDx1W503ZHXLScTin0n4f16fM9FHBFU+KouXPtYREQBERAEREAREQBERAFBv1X7nappQQHlu6zzKna5XI7dVgfUQ0bD/pjff5ngFlaOnvrlHyNN2g4h/x/D7LU/F0Xu/46nKVTtMZ/wArXTnVS6gjeUOZdYfCCNJwUWbHNS5AcKJMDhJAmWx4kidET8ByPIrU7UU+Io5CfhOPMKVQzdlUgngdCp11gbUUjhjI4omSeexvdFPvtOCCt/Q18jA10T9DyPBaOsjMcz2kcCstulwTG48dQktysZG/rGUNzAMj3U9QBgOxlpWtktlXSuzuCRp4OYcq4HoskVRNGe7I4DpyXnzMuQpI3jOWlp8Qtjs3tTeNm6oSW+o+7z3oZO8x3py8wq+9l+j2tcPJYZ46WUax4PhoofLJYkj0hZKDzF4PWNn/AGrWit7P7QfLa6oaFxyYyfBw4eq7al22hmjBgu1JM0jQtlbk/VfMc1Iz8BdnxUc0rs5WJLQwk8xk0bGvi1kViayfUNbt5DTwnta+mjH6pmj+Vw203tZgMboaB76uQ8CBusHmefovF/dXg5xlZooZAfgcVMdFBPMpNkWcVsksRWDcXa9XK8TmSsnJBOdxujR/dR4mDOViY14HwH5LMx+78QIWQkorCRrZzlN5k8kuJowpLCtY6viiGupUOe7vccRNwrxTPPJ0BlDeJwsUlfHHxd9VzUtXUyk5eR4BYHNkeMuc4q+H6jJ0/wBsws/GFkhv9MdHOAPmuSERWWno5ZpQxjSSSpSx5kZO6pqiCsw+J4djiFtKCR0VVDIw4c2RpB9VzWzdCaV7y5xJxqOQXS25okr6WI/jmY35kKLMcjPWhN2x5euV9T2InOqKruKouLP0YgiIoAREQBERAEVQhQFEROYQItmkbDC+V5w1jS4nwAXmNyqn1NRLUyHvSOyu120qextPYNdh07g3H6Rqf4XAzccLf8KpxB2PzPlvbzX95qIaSL2isv3fT5fUiyHLlgk4rM8ZKxuatwjgSPINFFlHdKnvbook7cEqGDWTkt1C2lqrGzRdm/GeC11S0knChRvfDLvNOF59GDFtPRmCrLwO47mtNgtOQu1jqKa40/u1SASRx5haqt2cmaS6lla9v5XaFXTK4NXTzbww7iFIByoNTBPSyYljcwjmr4Z9NVWSJTJavCwtkaRxWVjgVQtkqQqbqyBuU3CoZJY0arNHkKjWa8Flaw44KUDLE5Z2kY1WKOMqQyMkKQVEcTj3omHzaFeKC3v+Kliz5KrWY5LKwFWTIMP2TbT/APn3fIq19jt724HaMPUFTAcc07RWI2Na7ZumPwVUg82hS6a1spactikY+Qj4uGVldNjnhYJq1rG6uUZRGC+PepIXOn0yeKlbLVjKvae3RNOc1DT8lpnXyNmQQHg6EHVZNn71aKC9UtxMD2GCTe3WHQ+ipZlwaXoZWinCvU1yn0Uk37ZPoMEniqrnrXtnY6+ESxyTNadCTESB5kK+s2y2apHNbPc2MLuHcd/Zcs9JevuM+5Q45w6xZjfH9Ub5FFt1xoLi3eoquGfnhrtfkpR0OF4Si4vDRsq7IWx5oNNfhuERFBcIiIAiIgCo3iqngqOc2ON0jyA1oLj5BShzKK5mcRtpUia7GME7sLQ314lc5IdSpdwnNRUyznjI8u+ahkErr6K+6rjD0Pz7xLVPV6y29/eb/Ty+RhI1VrgsuFQsXuYRhwsE8eQpm4rHs0OiDBpahmOS1VWCx2V0VXFoNFqa6LIx4Lzkhg1rJC128DghbShuhGGyHPiVpZWOY5WB5BVEyDrHSUdWzdka14I1yFq6vZ6mkJdTSmLwOoWqjqHsOWuIU2G6ysGCcqckkOaz3Gn13BK3qw5+iwdpJEd2WNzSOORhb+G6MON7ipIrKeYbr2McPEZUtkYOdinBPFSmSAjiPmto+jtkwz2DWH9Gixi0Uh+CaRvyKjBJGjweikxtHgrxaJGjMVSx3gQr20NW0f8ATd5OTAyGNGVnaBhR3w1bf+g4+RVGuqwce7yfJWIJYwrsgKMz3k8YpB/2lXHtcfA/5ISZHvHVRpqkMzqFbLFWP0ZC7zOixG0zyO+/qYom8907xRsgi1twwDu4JUBsNbWHuxvc3wC6CGktNI8EMfUzct/XXyW6p+13A6XELeUbRr6ok2Dl7ZYHVOWvjf5uGMLc0uy1vi1mBqHDkThq2rZy4brRuhZQ4tblXSIwYmQTxxiKnc2CFvBrdAtvZKyohc6G609Dc6IQvayCSFo7xGhLsZ0Oq1bXSSyYB7vNTGO3QpGEayGmnoXtfG74TnAJGF1ls2lr442CRzZ2gfDINfmtM4B4zhY2ndOi87Ka7ViayZmk4hqtHLm09jj7fuvM763X+31ZEcj/AHaU/hf8J8nLcY8V5ZneGoW4sl/ntoEMgM9Nn4CdWj9J/hafU8Kws0/od/wftxzSVWuX/wBL91/H6HdIsVHUwVlOyop5BJG4aEfsehWVaRpp4Z9EhONkVKLymECJwBcdABkk8ELFfRcrtZemmJ9BSEODtJXj9gr73fWSb1PTybsQ+J+fi8vBcbV1Ub5i1hyAt3oeH4xZZ+SPmnabtbz82k0T26OX7L+Srz0VmEa7IV2FvEfO0W4VQ09FeGLIxo5hSSYgzwVSwHiFnO6BqsZLVAIdRTBzSQMrVVtK4Dgt+XLFIxr26gFQ1kHGVlORyWvkhLTldlWUW/q1oWqq7c8HG6vJog5wtKt3cLaS0Tw7Ab9Fb7lIeX0VRg13e6q4PePxFTjRvHL6Knujun0U5GCM2eVvAlZ2Vc3DKvbRPJ4fRZ4rfI78J+SZGC2GvnaRqStnR1bpPiJysUFsdoSPopnu8cIycKcsnBk7Y44rE+qLdQ7HqoVVVtBIacYUCaqJOhKtkqbZ1wkB0ePmsUlzcNN4ea05lOdXFII6mpfuU8bnnmRwHqoyCfNc5MfEFbSQ11xdlnciz3pHaD06qbR2aKECWseJXjXcHwj+6z1VfHGOzjA00AxgBTj1Bmo4aW3Rnc78p+KR3E+XRVZK+ofoNOqg07Zap+8c4W4pYGxMAGqlAz08Ya3JV7t5x3QFVucLIwBveVwXRM7NmvFYzKS7AWOqqAAQFgicSeaAm7x6lVysG9jiqGVASN5ULlGM2FVsgPNMg3Nhu01rqt8bz4H/AOrH1HUeK9EglZNCyaJ28x7Q5ruoK8mY8ErqNi7t2Ewt9Q/7qR2YnE/C48vI/utTxLRqyPew6rqd32P7QPT2LRXvwS+y/R+ns/qdouT23vT4pPsymOO7mZwPXg1dNWzso6OWqlxuxtzjqeQXmla8z1ElRM4b8ji52vMrC4bp+efeS6L6m+7bcXlpdOtLU8Sn1/CP9mqrppXDdBKjwB7XZcSp8r4B+JufNRHyR5OC35roD5MlsSY3nqVIjPVa+OVufiHzUlko45U5JJ7SFdkKI2UdVkEo6hMgyPIyrCrTIM8R81Tfb1HzViS4hA1W9o3qFTt2hGQXuYsbog7QhVM4xxWJ1UBqqgOpInHJYMrGaOH8gVTWgjX91jdWN/8ACmxOQaGHmFaaKnHED5LDPXsaPiUKe6tGcPUbEZNl7vTN5BUc+CLhgLn57scHdJ+S1s9fO/8AGUyiMs6epucEY4j5rSXC6ulJbGcNWsY2oqX7sUb5XfpGVsaOw1kwDpy2BvjqVDbYITpSTlxyslLS1VW7FPE5w68APVb+ks9BT4dI0zOHN/D5KW+djButw0DkBhEvUGto7HGzv1j+0P5W8FsTJDTRhkLQxo5AKJPWcgSoE07nu0Kl4XQEmsq3u0DiegWKjpn1Eu87gscEJkdk5W9pWCNoAGir1ZODNSwNY0NaMBSg0ALDG4q5zz1XpgGTf3VgmnIHFY5ZDjRRXkuKjoGZMl7uKkR6DRR4geizN+SsgjNnPNWu4oFRyYJMUhOVa15BVZOKxlQQSopFJjedCCQQcha5jsKTA/KEPK3M21u3n2pWFlNvMo4jiKPm79TvH9ly1VeK6cksjOD4rPbrW2KBrphmVwy7w8FK9ziPJY8K1XFRitkZGq1d2stldc8yZozVV7jq0qofXuJOCt/FSxg6MClx0zB+AfJeiiY+Tm4m3EnQFbGGG8bmWhmOhK3TYmN5AK9jmN0yArYwSc3WVF4pvjpyQObTlQhfKkZywZXb9i2Vujm58VrLjYWTEvEYDvzNTBBzbdoHg97IPks0d9zxcFdWbPytzujOOoWpnt0sZIcwhQGb2O9NPFwWYXZp5rk30sjToCrdyZg4uTJB1vv4f8J+qe9PP+65OJ1UXYjZK48gGkraUdDe5iMUT2tP4pO6PqpJybR87j/uo0kzjnH7qZT2asIBqKqFgPJpyVMZbKGLPaPdK7xOAoBz0xc44yc9FbHQ1dQ7EUD3eOMBdTH7pAcxxRgjnjVJK0Yw1OUGip9m53neqKmOIdB3ithT2a205y9hncOb3afJZJazxKiy1h8UBshJHCMRtawdGtAWCWp44IWqlqSeawSTE9fmpySbCaqPDKhzTuPNRS/xQd45VWyC8uc5ZYYS4jKQREngtjTQ4wiQMtJCGgHCnNwAscYAaAsqulgsVBHJWvcjtOCxPJVyGw7VW4GVYSd7CuaOaqDI0BZGhWMBWVgwFKJKq0nXCuKxu4qQWvCxO0VznjqrSQQqgxh2qyxOOeKwniroyFCKy6H/2Q==" alt="Foto Siti Husnul Hotimah, S.Pd"></div><p class="sm">Pengembang gim</p><p class="nm">Siti Husnul Hotimah, S.Pd</p><p>Guru Bahasa Indonesia</p><p>SMAN 1 Parongpong</p></aside>
+<button class="sndbtn" id="snb" aria-pressed="true" aria-label="Suara" onclick="sndT()">🔊</button>
+<button class="sndbtn mu" id="mub" aria-pressed="false" aria-label="Musik latar hutan" onclick="musT()">🎵</button>
+<main>
+<h1>Ekspedisi Naskah Nusantara</h1>
+<p class="tags"><span>🎓 Kelas XI</span><span>🌿 Fase F</span><span>📖 Bahasa Indonesia</span><span>🔬 Karya Ilmiah</span></p>
+<nav><button id="tm" class="on" onclick="tab('m')"><span class="ic">🧭</span><span><b>Peta Gim</b><small>Jelajahi 5 zona</small></span></button><button id="tg" onclick="tab('g')"><span class="ic">📚</span><span><b>Panduan Guru</b><small>Aturan dan alur kelas</small></span></button></nav>
+<div id="stage"></div>
+<div id="guide" hidden></div>
+</main>
+<script>
+const Z=[
+{n:"Pelabuhan Definisi",e:"⚓",p:10,badge:"Jangkar Emas",
+ story:"Kapal Nusa Pustaka merapat. Penjaga pelabuhan hanya mengizinkan awak yang bisa menjelaskan apa itu karya ilmiah.",
+ quest:"Menjelaskan pengertian, tujuan, dan perbedaan karya ilmiah dengan tulisan nonilmiah.",
+ q:[
+ {t:"pg",q:"Pernyataan yang paling tepat tentang karya ilmiah adalah …",o:["Tulisan yang menyampaikan pengalaman pribadi dengan bahasa indah","Tulisan hasil pengamatan, penelitian, atau kajian yang disusun sistematis dan dapat dipertanggungjawabkan","Tulisan yang bertujuan menghibur pembaca dengan cerita imajinatif","Tulisan opini yang mengajak pembaca bertindak"],a:1,e:"Karya ilmiah bertumpu pada kajian atau penelitian, disusun sistematis, dan dapat diuji kebenarannya."},
+ {t:"pg",q:"Perbedaan utama karya ilmiah dan karya nonilmiah terletak pada …",o:["Panjang tulisan","Jumlah halaman daftar isi","Dasar penulisan: data dan sumber teruji, bukan perasaan atau dugaan","Penggunaan kata-kata kiasan"],a:2,e:"Karya ilmiah mengandalkan data dan sumber yang dapat diverifikasi."},
+ {t:"pgk",q:"Pilih SEMUA tujuan penulisan karya ilmiah.",o:["Menyampaikan hasil penelitian atau gagasan secara ilmiah","Mengembangkan ilmu pengetahuan","Menghibur pembaca dengan imajinasi pengarang","Menjadi rujukan dan dokumentasi bagi peneliti lain","Memengaruhi pembaca lewat opini tanpa data"],a:[0,1,3],e:"Hiburan imajinatif ciri fiksi, dan opini tanpa data tidak memenuhi kaidah ilmiah."}
+ ]},
+{n:"Hutan Ciri",e:"🌲",p:10,badge:"Kompas Zamrud",
+ story:"Di hutan ini tumbuh dua jenis naskah: yang berakar pada data dan yang hanya berdaun opini. Pilah dengan teliti.",
+ quest:"Mengidentifikasi ciri karya ilmiah: objektif, sistematis, logis, bahasa baku, berdasar data, dan bersumber rujukan.",
+ q:[
+ {t:"tf",q:"Karya ilmiah bersifat objektif: kesimpulan didasarkan pada data, bukan perasaan penulis.",a:true,e:"Benar. Objektif berarti sesuai fakta dan terlepas dari kepentingan pribadi."},
+ {t:"tf",q:"Menulis “hasil penelitian ini sangat luar biasa menakjubkan” dianjurkan agar pembaca terkesan.",a:false,e:"Salah. Kata emotif tidak sesuai ciri lugas dan objektif; sajikan angka dan temuan."},
+ {t:"dnd",q:"Seret setiap kalimat ke kotak yang tepat (atau ketuk kalimat, lalu ketuk kotak).",b:["Ilmiah","Nonilmiah"],items:[["Hasil uji menunjukkan kadar klorofil naik 12% setelah perlakuan.",0],["Menurut saya, pasti rumput tetangga lebih hijau karena mereka beruntung.",1],["Sampel diambil secara acak dari 120 siswa kelas XI.",0],["Kota ini surga yang bikin hati meleleh.",1],["Data dianalisis dengan uji-t (Sugiyono, 2019).",0],["Katanya sih, minum es bikin batuk, ya begitulah.",1]],e:"Kalimat ilmiah memuat data, metode, atau rujukan. Kalimat nonilmiah berisi dugaan, emosi, atau kabar angin."},
+ {t:"pgk",q:"Pilih SEMUA ciri karya ilmiah.",o:["Objektif","Sistematis","Emotif dan persuasif","Menggunakan bahasa baku","Bersifat fiktif"],a:[0,1,3],e:"Ilmiah itu objektif, sistematis, dan berbahasa baku; emotif dan fiktif bukan cirinya."}
+ ]},
+{n:"Gua Struktur",e:"🕳️",p:10,badge:"Obor Perak",
+ story:"Halaman naskah tercerai-berai di dalam gua. Susun kembali sesuai kerangkanya agar pintu batu terbuka.",
+ quest:"Menyusun dan menjelaskan fungsi bagian karya ilmiah: awal, isi, dan akhir.",
+ q:[
+ {t:"match",q:"Jodohkan bagian karya ilmiah dengan fungsinya.",pairs:[["Abstrak","Ringkasan singkat isi tulisan"],["Pendahuluan","Memuat latar belakang, rumusan masalah, dan tujuan"],["Metode","Cara memperoleh dan menganalisis data"],["Kesimpulan","Jawaban atas rumusan masalah"],["Daftar pustaka","Daftar sumber rujukan yang dipakai"]],e:"Setiap bagian punya tugas khusus sehingga alur penalaran mudah diikuti."},
+ {t:"order",q:"Urutkan bagian laporan penelitian dari awal sampai akhir.",items:["Abstrak","Pendahuluan","Metode penelitian","Hasil dan pembahasan","Kesimpulan","Daftar pustaka"],e:"Pola umum: abstrak, pendahuluan, metode, hasil dan pembahasan, kesimpulan, daftar pustaka."},
+ {t:"pg",q:"Kalimat “Berdasarkan angket, 68% siswa menyatakan media digital membantu pemahaman” paling tepat ditempatkan pada bagian …",o:["Pendahuluan","Hasil dan pembahasan","Daftar pustaka","Kata pengantar"],a:1,e:"Temuan berupa data hasil pengumpulan data dilaporkan di bagian hasil dan pembahasan."}
+ ]},
+{n:"Menara Jenis & Contoh (Boss)",e:"🏰",p:20,boss:1,badge:"Mahkota Laksamana",
+ story:"Penjaga Menara, Sang Penyunting Agung, menguji penalaranmu. Tidak ada soal hafalan: analisis, nilai, dan kenali jenisnya.",
+ quest:"Menganalisis cuplikan teks, mengevaluasi kelemahan tulisan, dan mengenali jenis karya ilmiah beserta contohnya.",
+ q:[
+ {t:"pg",q:"Cuplikan: “Penelitian ini bertujuan mengetahui pengaruh media pembelajaran digital terhadap hasil belajar siswa kelas XI. Dengan metode eksperimen semu pada 60 responden, rata-rata nilai meningkat 14,5 poin.” Cuplikan ini paling tepat merupakan …",o:["Kata pengantar makalah","Abstrak artikel ilmiah hasil penelitian","Pendahuluan cerpen","Opini di surat kabar"],a:1,e:"Memuat tujuan, metode, sampel, dan hasil secara ringkas: ciri abstrak artikel ilmiah."},
+ {t:"pgk",q:"Paragraf: “Menurut saya sampah plastik itu menyebalkan banget. Semua orang pasti setuju pemerintah gagal. Jadi plastik sebaiknya dilarang saja.” Pilih SEMUA kelemahannya jika dinilai sebagai karya ilmiah.",o:["Tidak ada data dan rujukan yang mendukung","Bahasa emotif dan tidak baku","Generalisasi “semua orang pasti setuju” tanpa bukti","Kalimat terlalu panjang","Terlalu banyak istilah teknis"],a:[0,1,2],e:"Paragraf itu subjektif, tidak berdata, dan menggeneralisasi tanpa bukti."},
+ {t:"match",q:"Jodohkan kasus dengan jenis karya ilmiahnya.",pairs:[["Mahasiswa melaporkan penelitian akhir untuk meraih gelar sarjana","Skripsi"],["Siswa mengkaji topik dari banyak pustaka untuk tugas mata pelajaran","Makalah"],["Peneliti mempublikasikan temuannya di jurnal terakreditasi","Artikel jurnal"],["Siswa melaporkan hasil percobaan di laboratorium","Laporan praktikum"]],e:"Jenis ditentukan oleh tujuan, kedalaman, dan tempat publikasi karya."}
+ ]}
+];
+Z.push({n:"Puncak Nalar",e:"🏔️",p:20,badge:"Mahkota Awan",
+ story:"Kabut menipis. Jalan setapak menyempit menuju Puncak Nalar, tempat Naskah Agung disimpan. Di sini tidak ada soal yang bisa dijawab dengan menghafal: kamu harus menalar, membandingkan, dan memperbaiki.",
+ quest:"Menganalisis, mengevaluasi, dan merevisi tulisan ilmiah: menilai keselarasan judul, masalah, dan metode; menyusun paragraf yang koheren; serta menemukan dan memperbaiki kelemahan penulisan.",
+ q:[
+ {t:"pg",q:"Bandingkan dua kalimat. (1) “Berdasarkan observasi pada 30 siswa selama dua minggu, rata-rata waktu membaca meningkat dari 12 menjadi 19 menit per hari.” (2) “Hampir semua siswa kini gemar membaca karena program literasi ini sangat bagus.” Penilaian yang paling tepat adalah …",o:["Kalimat (2) lebih ilmiah karena menyimpulkan secara luas","Kalimat (1) lebih ilmiah karena memuat data terukur dan keterangan pengamatan, sedangkan kalimat (2) menggeneralisasi dan menilai tanpa bukti","Keduanya ilmiah karena sama-sama membahas literasi","Keduanya nonilmiah karena memuat angka"],a:1,e:"Kalimat (1) dapat diperiksa (jumlah, waktu, hasil). Kalimat (2) memakai kata hampir semua dan sangat bagus tanpa dasar data."},
+ {t:"pgk",q:"Judul: “Pengaruh Penggunaan Kamus Digital terhadap Kemampuan Menulis Teks Eksposisi Siswa Kelas XI”. Rumusan masalah: “Bagaimana minat siswa kelas X terhadap membaca novel?” Pilih SEMUA pernyataan yang tepat.",o:["Rumusan masalah tidak selaras dengan judul","Subjek pada judul (kelas XI) berbeda dengan subjek pada rumusan masalah (kelas X)","Variabel pada rumusan masalah (minat membaca novel) tidak sama dengan variabel pada judul (kemampuan menulis eksposisi)","Ketidakselarasan itu tidak masalah asalkan kesimpulan ditulis dengan bahasa baku","Judul wajib dipersingkat menjadi dua kata"],a:[0,1,2],e:"Judul, rumusan masalah, tujuan, dan metode harus selaras. Bahasa baku tidak menutupi ketidakselarasan."},
+ {t:"order",q:"Susun kalimat acak berikut menjadi paragraf pendahuluan yang runtut dan logis.",items:["Sampah plastik menjadi masalah lingkungan yang terus meningkat di wilayah perkotaan.","Survei terhadap 100 rumah tangga (2023) menunjukkan bahwa 18% sampah yang dihasilkan berupa plastik.","Sebagian besar plastik tersebut berupa kemasan sekali pakai yang sulit terurai.","Oleh karena itu, pengurangan kemasan sekali pakai perlu diprioritaskan dalam pengelolaan sampah.","Penelitian ini mengkaji efektivitas program kantong belanja guna ulang sebagai salah satu upaya tersebut."],e:"Pola umum pendahuluan: pernyataan masalah, bukti data, penjelasan penyebab, simpulan sementara, lalu fokus penelitian."},
+ {t:"dnd",q:"Tempatkan setiap kalimat pada bagian karya ilmiah yang paling tepat.",b:["Pendahuluan","Metode","Hasil dan pembahasan","Kesimpulan"],items:[["Penelitian ini bertujuan mengetahui pengaruh kebiasaan membaca terhadap kemampuan menulis siswa.",0],["Data dikumpulkan melalui tes menulis dan angket kepada 40 responden yang dipilih secara acak.",1],["Skor rata-rata kelompok eksperimen 82, lebih tinggi daripada kelompok kontrol 74, sejalan dengan temuan Rahmawati (2020).",2],["Dengan demikian, kebiasaan membaca terbukti berpengaruh positif terhadap kemampuan menulis siswa.",3],["Instrumen divalidasi oleh dua dosen dan dianalisis dengan uji-t.",1],["Selama ini siswa kesulitan menuangkan gagasan secara runtut sehingga penyebabnya perlu diteliti.",0]],e:"Pahami fungsinya: masalah dan tujuan di pendahuluan, cara kerja di metode, temuan beserta tafsirannya di hasil dan pembahasan, jawaban akhir di kesimpulan."},
+ {t:"match",q:"Jodohkan kalimat dengan kelemahan ilmiahnya.",pairs:[["Semua siswa pasti malas membaca karena zaman sekarang serba gawai.","Generalisasi berlebihan tanpa bukti"],["Menurut saya, metode ini keren banget dan hasilnya wow.","Bahasa emotif dan tidak baku"],["Pembelajaran daring terbukti menurunkan prestasi belajar.","Klaim tanpa rujukan atau data"],["Nilai siswa naik setelah pelatihan, jadi gurunya pasti hebat.","Simpulan tidak ditarik secara logis dari data"]],e:"Mengenali jenis kelemahan membantu merevisi: tambahkan data, rujukan, bahasa baku, dan batasi simpulan pada apa yang didukung data."},
+ {t:"pg",q:"Seorang siswa menulis tujuan penelitian: “Untuk membuktikan bahwa metode ceramah adalah metode terbaik.” Mengapa rumusan ini bermasalah secara ilmiah?",o:["Karena kalimatnya terlalu pendek","Karena tidak memakai kata penelitian","Karena kesimpulan sudah ditentukan sebelum data dikumpulkan sehingga mengurangi objektivitas","Karena menggunakan bahasa baku"],a:2,e:"Tujuan ilmiah seharusnya menguji atau mengetahui (mis. membandingkan efektivitas), bukan membuktikan kesimpulan yang sudah dipilih."},
+ {t:"pgk",q:"Sebuah tulisan siswa setebal 12 halaman membahas “Dampak Media Sosial terhadap Etika Berbahasa”. Isinya latar belakang, kajian dari 8 buku, dan analisis penulis, tanpa pengumpulan data lapangan. Pilih SEMUA pernyataan yang tepat.",o:["Tulisan ini lebih tepat disebut makalah","Tulisan ini bukan laporan penelitian karena tidak ada data lapangan","Tulisan ini wajib memuat bagian metode lengkap dengan instrumen seperti skripsi","Daftar pustaka tetap diperlukan","Tulisan ini disebut skripsi karena ditulis oleh siswa"],a:[0,1,3],e:"Makalah mengkaji topik dari pustaka. Skripsi menyajikan penelitian sendiri untuk gelar sarjana, dan daftar pustaka tetap wajib untuk menunjukkan sumber."}
+ ]});
+const S={z:0,qi:0,zp:0,zm:0,un:1,res:{}};
+let A={};
+const $=s=>document.querySelector(s),st=$("#stage");
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const tot=()=>Object.values(S.res).reduce((s,r)=>s+r.p,0), mx=()=>Z.reduce((s,z)=>s+z.q.length*z.p,0);
+
+function tab(t){$("#tm").classList.toggle("on",t=="m");$("#tg").classList.toggle("on",t=="g");st.hidden=t!="m";$("#guide").hidden=t!="g"}
+
+function map(){scene(0);
+ const pos=[[70,480],[250,395],[80,300],[240,205],[130,80]];
+ let g=`<svg viewBox="0 0 320 540" role="img" aria-label="Peta ekspedisi"><path d="M70 480C200 480 280 450 250 395C220 340 90 360 80 300C70 240 220 260 240 205C250 150 140 150 130 80" fill="none" stroke="var(--sea)" stroke-width="4" stroke-dasharray="3 9" stroke-linecap="round"/>`;
+ Z.forEach((z,i)=>{const [x,y]=pos[i],lock=i+1>S.un,done=S.res[i]&&S.res[i].ok;
+  g+=`<g class="node ${lock?"lock":""} ${done?"done":""}" tabindex="0" role="button" aria-label="${z.n}${lock?" (terkunci)":""}" onclick="go(${i})" onkeydown="if(event.key=='Enter')go(${i})"><circle cx="${x}" cy="${y}" r="30"/><text x="${x}" y="${y+9}" text-anchor="middle" style="font-size:26px;stroke:none">${lock?"🔒":z.e}</text><text text-anchor="middle"><tspan x="${Math.min(Math.max(x,92),228)}" y="${y+48}">Zona ${i+1}</tspan><tspan x="${Math.min(Math.max(x,92),228)}" y="${y+63}">${z.n.replace(" (Boss)","")}</tspan></text></g>`});
+ g+="</svg>";
+ const pct=Math.round(tot()/mx()*100);
+ st.innerHTML=`<div class="panel"><h2>🗺️ Misi: Temukan Naskah Hilang</h2><p>Gelombang laut menelan Naskah Agung Nusantara, kitab penuntun penulisan ilmiah. Kamu, awak Kapal Nusa Pustaka, harus menaklukkan lima zona, mengumpulkan lencana, mengalahkan Sang Penyunting Agung di menara, lalu mendaki Puncak Nalar.</p><div class="stat"><span>⭐ Poin: <b>${tot()}</b> / ${mx()}</span><span>🏅 Lencana: <b>${Object.values(S.res).filter(r=>r.ok).length}</b> / ${Z.length}</span></div><div class="bar" style="margin-top:8px"><i style="width:${pct}%"></i></div></div>${g}<p class="stat">👆 Ketuk zona untuk berlayar. Lulus zona (skor 70% atau lebih) membuka zona berikutnya.</p>`}
+
+function go(i){if(i+1>S.un)return;scene(i+1);S.z=i;S.qi=0;S.zp=0;S.zm=0;intro()}
+function intro(){const z=Z[S.z];
+ st.innerHTML=`<div class="panel"><h2>${z.e} Zona ${S.z+1}: ${z.n}</h2><p class="story">📜 ${z.story}</p><p>🎯 <b>Misi utama:</b> ${z.quest}</p><p>🏆 <b>Imbalan:</b> lencana “${z.badge}”, ${z.p} poin per soal${z.boss?" (poin ganda untuk Boss)":""}, bintang 1–3 sesuai ketepatan.</p><p>✅ <b>Syarat lulus:</b> skor zona minimal 70%.</p><button class="pri" onclick="sfx('go');ques()">⚔️ Mulai misi</button> <button onclick="map()">🗺️ Kembali ke peta</button></div>`}
+
+const TL={pg:"🔘 Pilihan Ganda",pgk:"☑️ Pilihan Ganda Kompleks",tf:"⚖️ Benar / Salah",dnd:"🧩 Seret dan Lepas",match:"🔗 Menjodohkan",order:"🔢 Mengurutkan"};
+function ques(){const q=Z[S.z].q[S.qi];A={done:false};
+ if(q.t=="pgk")A.v=[];else if(q.t=="dnd"){A.v={};A.sel=null}
+ else if(q.t=="match"){A.v=q.pairs.map(()=>"");A.r=shuf(q.pairs.map((p,i)=>i))}
+ else if(q.t=="order"){A.v=shuf(q.items.map((x,i)=>i))}else A.v=null;
+ const n=Z[S.z].q.length;
+ st.innerHTML=`<div class="panel"><div class="stat"><span>Zona ${S.z+1} · Soal ${S.qi+1} dari ${n}</span><span>Poin zona: ${S.zp}</span></div><div class="bar"><i style="width:${S.qi/n*100}%"></i></div><span class="qt">${TL[q.t]}</span><h3 style="margin-top:8px">${q.q}</h3><div id="body"></div><div id="fb"></div><button class="pri" id="chk" onclick="check()">Periksa jawaban</button></div>`;draw()}
+
+function draw(){const q=Z[S.z].q[S.qi],d=A.done,b=$("#body");let h="";
+ const cls=i=>!d?(q.t=="pgk"?A.v.includes(i):A.v===i)?"on":"":(q.t=="pgk"?q.a.includes(i)?"ok":A.v.includes(i)?"no":"":i==q.a?"ok":A.v===i?"no":"");
+ if(q.t=="pg")h=q.o.map((o,i)=>`<button class="opt ${cls(i)}" data-a="pick" data-i="${i}">${o}</button>`).join("");
+ if(q.t=="pgk")h=q.o.map((o,i)=>`<button class="opt ${cls(i)}" role="checkbox" aria-checked="${A.v.includes(i)}" data-a="tog" data-i="${i}">${A.v.includes(i)?"☑":"☐"} ${o}</button>`).join("");
+ if(q.t=="tf")h=[["Benar",1],["Salah",0]].map(([l,v])=>`<button class="opt ${!d?(A.v===v?"on":""):(v==(q.a?1:0)?"ok":A.v===v?"no":"")}" data-a="pick" data-i="${v}">${l}</button>`).join("");
+ if(q.t=="dnd"){const chip=i=>`<span class="chip ${A.sel===i?"sel":""}" draggable="${!d}" data-a="chip" data-i="${i}">${q.items[i][0]}</span>`;
+  const pool=q.items.map((_,i)=>i).filter(i=>!(i in A.v));
+  h=`<div class="chips" data-a="pool">${pool.map(chip).join("")||"<i>Semua kalimat sudah ditempatkan</i>"}</div>`+q.b.map((n,k)=>`<div class="bk" data-a="bk" data-i="${k}"><b>${n}</b><div class="chips" style="border:0;padding:4px 0">${q.items.map((_,i)=>A.v[i]===k?(d?`<span class="chip ${q.items[i][1]==k?"ok":"no"}">${q.items[i][0]}</span>`:chip(i)):"").join("")}</div></div>`).join("")}
+ if(q.t=="match")h=q.pairs.map((p,i)=>`<div class="row"><span>${p[0]}</span><select data-a="m" data-i="${i}" ${d?"disabled":""} aria-label="${p[0]}"><option value="">Pilih…</option>${A.r.map(j=>`<option value="${j}" ${A.v[i]===String(j)?"selected":""}>${q.pairs[j][1]}</option>`).join("")}</select></div>`).join("");
+ if(q.t=="order")h=A.v.map((x,p)=>`<div class="ord ${d?(x==p?"ok":"no"):""}"><span>${q.items[x]}</span><button data-a="up" data-i="${p}" aria-label="Naik" ${d?"disabled":""}>▲</button><button data-a="dn" data-i="${p}" aria-label="Turun" ${d?"disabled":""}>▼</button></div>`).join("");
+ b.innerHTML=h}
+
+function place(i,k){if(A.done||i==null)return;A.v[i]=k;A.sel=null;draw()}
+st.addEventListener("click",e=>{const t=e.target.closest("[data-a]");if(!t||A.done||A.v===undefined)return;const a=t.dataset.a,i=+t.dataset.i,q=Z[S.z]&&Z[S.z].q[S.qi];
+ if(a=="pick"){A.v=i;draw()}
+ if(a=="tog"){A.v=A.v.includes(i)?A.v.filter(x=>x!=i):[...A.v,i];draw()}
+ if(a=="chip"){if(i in A.v){delete A.v[i];A.sel=null}else A.sel=A.sel===i?null:i;draw()}
+ if(a=="bk"||a=="pool"){if(a=="pool"){if(A.sel!=null&&A.sel in A.v){delete A.v[A.sel]}A.sel=null;draw()}else place(A.sel,i)}
+ if(a=="up"&&i>0){[A.v[i-1],A.v[i]]=[A.v[i],A.v[i-1]];draw()}
+ if(a=="dn"&&i<A.v.length-1){[A.v[i+1],A.v[i]]=[A.v[i],A.v[i+1]];draw()}});
+st.addEventListener("change",e=>{const t=e.target;if(t.dataset.a=="m"){A.v[+t.dataset.i]=t.value}});
+st.addEventListener("dragstart",e=>{const t=e.target.closest("[data-a=chip]");if(t){A.sel=+t.dataset.i;e.dataTransfer.setData("text/plain","x")}});
+st.addEventListener("dragover",e=>{if(e.target.closest("[data-a=bk],[data-a=pool]"))e.preventDefault()});
+st.addEventListener("drop",e=>{const t=e.target.closest("[data-a=bk],[data-a=pool]");if(!t)return;e.preventDefault();if(t.dataset.a=="bk")place(A.sel,+t.dataset.i);else{if(A.sel in A.v)delete A.v[A.sel];A.sel=null;draw()}});
+
+function frac(q){const v=A.v;
+ if(q.t=="pg")return v===q.a?1:0;
+ if(q.t=="tf")return v===(q.a?1:0)?1:0;
+ if(q.t=="pgk"){const h=v.filter(x=>q.a.includes(x)).length,w=v.length-h;return Math.max(0,(h-w)/q.a.length)}
+ if(q.t=="dnd")return q.items.filter((it,i)=>v[i]===it[1]).length/q.items.length;
+ if(q.t=="match")return v.filter((x,i)=>x===String(i)).length/v.length;
+ if(q.t=="order")return v.filter((x,p)=>x==p).length/v.length}
+function ans(q){
+ if(q.t=="match")return "Pasangan benar: "+q.pairs.map(p=>p[0]+" → "+p[1]).join("; ");
+ if(q.t=="order")return "Urutan benar: "+q.items.join(" → ");return ""}
+function check(){const z=Z[S.z],q=z.q[S.qi];
+ if(A.v===null){$("#fb").innerHTML='<div class="fb">Pilih satu jawaban dulu.</div>';return}
+ A.done=true;const f=frac(q),p=Math.round(f*z.p);S.zp+=p;sfx(f==1?"ok":f>0?"part":"no");
+ const last=S.qi==z.q.length-1;
+ $("#fb").innerHTML=`<div class="fb"><b>${f==1?"✅ Tepat!":f>0?"🌓 Sebagian benar.":"❌ Belum tepat."}</b> ⭐ +${p} poin. 💡 ${q.e}${ans(q)?"<br><small>"+ans(q)+"</small>":""}</div>`;
+ draw();const c=$("#chk");c.textContent=last?"Lihat hasil zona":"Soal berikutnya";c.onclick=()=>{S.qi++;last?zoneEnd():ques()}}
+
+let SND=true,AC=null;
+function sfx(k){try{navigator.vibrate&&navigator.vibrate({ok:40,part:[30,30,30],no:[70,40,70],win:[80,40,80,40,200],lose:120}[k])}catch(e){}if(!SND)return;try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const seq={ok:[[660,.1],[880,.18]],part:[[520,.12],[600,.14]],no:[[220,.16],[160,.24]],win:[[523,.12],[659,.12],[784,.12],[1047,.4]],lose:[[330,.18],[262,.18],[196,.35]]}[k];let t=AC.currentTime+.02;seq.forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=(k=="no"||k=="lose")?"triangle":"sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02);t+=d*.9})}catch(e){}}
+let MU=false,MT=null,MO=[],MG=null;
+function bell(f,v,d){const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sine";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.05);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(MG);o.start(t);o.stop(t+d+.05)}
+function chirp(){const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime,b=2200+Math.random()*1200;o.frequency.setValueAtTime(b,t);o.frequency.exponentialRampToValueAtTime(b*1.35,t+.09);o.frequency.exponentialRampToValueAtTime(b*.9,t+.18);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.03,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.2);o.connect(g);g.connect(MG);o.start(t);o.stop(t+.25)}
+function musOn(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume();MG=AC.createGain();MG.gain.value=.0001;MG.gain.exponentialRampToValueAtTime(.6,AC.currentTime+1.5);MG.connect(AC.destination);const lp=AC.createBiquadFilter();lp.type="lowpass";lp.frequency.value=500;lp.connect(MG);MO=[110,165.2,220.5].map((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type="sine";o.frequency.value=f;g.gain.value=.05/(i+1);o.connect(g);g.connect(lp);o.start();return o});const N=[330,392,440,524,588,660];let k=0;MT=setInterval(()=>{k++;if(Math.random()<.7)bell(N[Math.random()*N.length|0],.05,2.6);if(k%3==0&&Math.random()<.6)chirp()},2200)}catch(e){}}
+function musOff(){clearInterval(MT);const o=MO;MO=[];try{MG.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+.5)}catch(e){}setTimeout(()=>o.forEach(x=>{try{x.stop()}catch(e){}}),600)}
+function musT(){MU=!MU;const b=$("#mub");b.style.opacity=MU?1:.6;b.setAttribute("aria-pressed",String(MU));MU?musOn():musOff()}
+function sndT(){SND=!SND;const b=$("#snb");b.textContent=SND?"🔊":"🔇";b.setAttribute("aria-pressed",String(SND));if(SND)sfx("ok")}
+let ST=0;
+const AX=()=>{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=="suspended")AC.resume()};
+function tn(f,t,d,w,v,dst){const o=AC.createOscillator(),g=AC.createGain();o.type=w||"square";o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(dst||AC.destination);o.start(t);o.stop(t+d+.03)}
+function nz(t,d,v,hp,dst){const n=Math.max(1,AC.sampleRate*d|0),b=AC.createBuffer(1,n,AC.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=b;f.type="highpass";f.frequency.value=hp;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(dst||AC.destination);s.start(t)}
+function combo(){const d=document.createElement("div");d.className="cb";d.textContent="🔥 Combo ×"+ST;document.body.appendChild(d);setTimeout(()=>d.remove(),1300)}
+function sfx(k){try{navigator.vibrate&&navigator.vibrate({ok:40,part:[30,30,30],no:[70,40,70],win:[80,40,80,40,200],lose:120,go:30}[k])}catch(e){}
+ if(k=="ok")ST++;else if(k=="no")ST=0;
+ if(k=="ok"&&ST>=2)combo();
+ if(!SND)return;try{AX();const t=AC.currentTime+.01,m=Math.pow(1.122,Math.min(Math.max(ST-1,0),6));
+ const S={ok:[[784,.07],[1047,.07],[1319,.18]],part:[[587,.08],[698,.14]],no:[[196,.12,"sawtooth"],[147,.3,"sawtooth"]],win:[[523,.1],[659,.1],[784,.1],[1047,.12],[784,.08],[1047,.08],[1319,.5]],lose:[[392,.15],[330,.15],[262,.15],[196,.55,"sawtooth"]],go:[[330,.07],[440,.07],[660,.07],[880,.2]]}[k];
+ let x=t;S.forEach(([f,d,w])=>{tn(f*(k=="ok"?m:1),x,d,w,k=="no"?.2:.14);x+=d*.95});
+ if(k=="ok")tn(131*m,t,.25,"triangle",.25);
+ if(k=="win"){tn(131,t,.9,"sawtooth",.12);nz(t+.55,.7,.12,3000)}
+ if(k=="no")nz(t,.12,.15,800)}catch(e){}}
+function musOn(){try{AX();MG=AC.createGain();MG.gain.value=.0001;MG.gain.exponentialRampToValueAtTime(.7,AC.currentTime+.6);MG.connect(AC.destination);
+ const R=[110,87.31,130.81,98],C=[[440,523.25,659.25],[349.23,440,523.25],[523.25,659.25,784],[392,493.88,587.33]],q=60/132/4;let nt=AC.currentTime+.1,s=0;
+ const step=(s,t)=>{const bar=s>>4,i=s&15,ch=C[bar];
+  if(i%4==0){const o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(45,t+.12);g.gain.setValueAtTime(.55,t);g.gain.exponentialRampToValueAtTime(.0001,t+.2);o.connect(g);g.connect(MG);o.start(t);o.stop(t+.22)}
+  if(i==4||i==12)nz(t,.14,.16,1500,MG);
+  if(i%2==0)nz(t,.04,.045,7000,MG);
+  if(i%2==0)tn(R[bar]*(i%8==6?2:1),t,.1,"square",.09,MG);
+  tn(ch[[0,1,2,1][i%4]]*((i>=8&&i%4==2)?2:1),t,.09,"square",.035,MG)};
+ MT=setInterval(()=>{while(nt<AC.currentTime+.25){step(s,nt);nt+=q;s=(s+1)%64}},50)}catch(e){}}
+function musOff(){clearInterval(MT);try{MG.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+.3)}catch(e){}}
+function confetti(n){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;const c=["#e0b867","#7fb069","#f3f7dd","#e58f6a","#4fc1c9"];let h="";for(let i=0;i<n;i++)h+=`<i class="cf" style="left:${Math.random()*100}%;background:${c[i%5]};--x:${Math.random()*140-70}px;--r:${Math.random()*720}deg;--t:${2.2+Math.random()*1.8}s;animation-delay:${Math.random()*.6}s"></i>`;const d=document.createElement("div");d.innerHTML=h;document.body.appendChild(d);setTimeout(()=>d.remove(),5000)}
+function zoneEnd(){const z=Z[S.z],m=z.q.length*z.p,pct=Math.round(S.zp/m*100),ok=pct>=70,stars=pct==100?3:pct>=85?2:ok?1:0;
+ const prev=S.res[S.z];if(!prev||S.zp>prev.p)S.res[S.z]={p:S.zp,ok:ok||(prev&&prev.ok)};
+ if(ok&&S.z+1==S.un&&S.un<Z.length)S.un++;
+ const fin=ok&&S.z==Z.length-1;sfx(ok?"win":"lose");if(ok)confetti(fin?90:50);
+ st.innerHTML=`<div class="panel"><h2>${ok?"🎉 Zona taklukkan!":"💪 Belum lolos, ayo coba lagi"}</h2><p class="stars" aria-label="${stars} dari 3 bintang">${[0,1,2].map(i=>`<span class="${i<stars?"on":""}" style="--d:${i*.25}s">${i<stars?"★":"☆"}</span>`).join("")}</p><p>📊 Skor zona: <b>${S.zp}/${m}</b> (${pct}%).${ok?`  Lencana baru diraih!</p><div class="badge"><span class="bi">🏅</span><b>${z.badge}</b><i style="--a:0">✨</i><i style="--a:1">✨</i><i style="--a:2">✨</i></div><p style="margin:0">`:" Diskusikan soal yang keliru bersama kru, lalu ulangi."}</p>${fin?"":""}<button class="pri" onclick="${fin?"ending()":ok?"map()":"go("+S.z+")"}">${fin?"🏔️ Menuju Puncak Finish":ok?"🗺️ Kembali ke peta":"🔄 Ulangi zona"}</button> ${ok&&!fin?"":"<button onclick=\"map()\">🗺️ Peta</button>"}</div>`}
+
+let RT=0,RW=[];
+function rate(n){RT=n;document.querySelectorAll(".rate button").forEach((b,i)=>b.classList.toggle("on",i+1==n))}
+function ending(){scene(5);sfx("win");confetti(120);
+ const pct=Math.round(tot()/mx()*100),t=pct>=90?"Laksamana Naskah":pct>=75?"Navigator Ilmiah":"Pelaut Muda";
+ RW=Z.map((z,i)=>{const r=S.res[i]||{p:0},m=z.q.length*z.p,pc=Math.round(r.p/m*100),s=pc==100?3:pc>=85?2:pc>=70?1:0;return{n:z.n.replace(" (Boss)",""),b:z.badge,p:r.p,m,pc,s}});RW.t=t;RW.pct=pct;
+ const stars=RW.reduce((a,r)=>a+r.s,0);
+ st.innerHTML=`<div class="panel"><h2>🏔️ Puncak Finish</h2><p>Kamu berdiri di puncak dan memandang hutan yang sudah kamu lewati. Naskah Agung Nusantara ditemukan!</p><p style="margin:0">🏆 Skor akhir</p><div class="big">${tot()}<small style="font-size:1.2rem"> / ${mx()}</small></div><p>🎯 Akurasi <b>${pct}%</b> · Bintang <b>${stars}</b>/${Z.length*3} · 👑 Gelar: <b>${t}</b></p></div>
+<div class="panel"><h3>📊 Rekap perjalanan</h3><div class="wide"><table><tr><th>Zona</th><th>Skor</th><th>%</th><th>Bintang</th><th>Lencana</th></tr>${RW.map((r,i)=>`<tr><td>${i+1}. ${r.n}</td><td>${r.p}/${r.m}</td><td>${r.pc}%</td><td>${"★".repeat(r.s)}${"☆".repeat(3-r.s)}</td><td>${r.s?r.b:"-"}</td></tr>`).join("")}<tr><th>Total</th><th>${tot()}/${mx()}</th><th>${pct}%</th><th>${stars}/${Z.length*3}</th><th></th></tr></table></div></div>
+<div class="panel"><h3>🪞 Refleksi di puncak</h3>
+<label for="nm">✍️ Nama (atau nama kru)</label><input id="nm" autocomplete="off">
+<label>🌡️ Seberapa paham aku tentang karya ilmiah sekarang? (1 = belum, 5 = sangat paham)</label><div class="rate">${[1,2,3,4,5].map(n=>`<button onclick="rate(${n})">${["😕","🙂","😀","😎","🤩"][n-1]} ${n}</button>`).join("")}</div>
+<label for="r1">💡 Tiga hal yang kupelajari tentang pengertian, ciri, struktur, atau jenis karya ilmiah</label><textarea id="r1" rows="3"></textarea>
+<label for="r2">🧗 Bagian yang masih sulit bagiku, dan alasannya</label><textarea id="r2" rows="3"></textarea>
+<label for="r3">🚀 Langkah pertamaku untuk menulis karya ilmiah sederhana</label><textarea id="r3" rows="3"></textarea>
+<button class="pri" onclick="recap()">📝 Buat rekap akhir</button><div id="rk"></div></div>
+<button onclick="S.un=1;S.res={};map()">🔄 Main lagi dari awal</button>`}
+function recap(){const v=id=>($("#"+id).value||"").trim()||"-";
+ const tx=`REKAP EKSPEDISI NAKSAH NUSANTARA\nNama: ${v("nm")}\nGelar: ${RW.t}\nSkor akhir: ${tot()}/${mx()} (${RW.pct}%)\n\n`+RW.map((r,i)=>`Zona ${i+1} ${r.n}: ${r.p}/${r.m} (${r.pc}%), ${r.s} bintang`).join("\n")+`\n\nREFLEKSI\nPemahaman diri (1-5): ${RT||"-"}\nYang kupelajari: ${v("r1")}\nYang masih sulit: ${v("r2")}\nLangkah pertamaku: ${v("r3")}`;
+ $("#rk").innerHTML=`<h3 style="margin-top:16px">Rekap siap disalin</h3><textarea id="rkt" rows="12" readonly></textarea><button class="pri" onclick="cp()">📋 Salin rekap</button> <span id="cm"></span>`;$("#rkt").value=tx;$("#rk").scrollIntoView({behavior:"smooth"})}
+function cp(){const t=$("#rkt");t.select();let ok=false;try{ok=document.execCommand("copy")}catch(e){}$("#cm").textContent=ok?"Tersalin. Kirim ke guru.":"Teks sudah terpilih; salin manual lalu kirim ke guru."}
+function ending0(){const pct=Math.round(tot()/mx()*100),t=pct>=90?"Laksamana Naskah":pct>=75?"Navigator Ilmiah":"Pelaut Muda";
+ st.innerHTML=`<div class="panel"><h2>👑 Naskah Agung ditemukan!</h2><p>Sang Penyunting Agung mengakui kemampuanmu. Gelar akhirmu: <b>${t}</b>.</p><p>Total poin: <b>${tot()}/${mx()}</b> (${pct}%). Semua lencana: Jangkar Emas, Kompas Zamrud, Obor Perak, Mahkota Laksamana.</p><button class="pri" onclick="map()">Kembali ke peta</button></div>`}
+
+function scene(i){$("#scene").className="s"+i}
+(function(){const sc=$("#scene");
+ const pines=(n,h,c,o)=>{let d="";for(let i=0;i<n;i++){const x=(i+.1+Math.random()*.8)*1000/n,hh=h*(.7+Math.random()*.4),w=hh*.3;for(let t=0;t<4;t++){const a=400-hh+t*hh*.2,b=a+hh*.4,f=w*(.45+t*.2);d+=`M${x-f} ${b}L${x} ${a}L${x+f} ${b}Z`}d+=`M${x-4} 400V${400-hh*.3}H${x+4}V400Z`}
+  return `<svg class="tr" style="--c:var(${c});height:${o}vh;opacity:${c=="--t3"?.8:1}" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMax slice"><path d="${d}M0 380H1000V400H0Z"/></svg>`};
+ sc.insertAdjacentHTML("beforeend",pines(16,300,"--t3",62)+pines(11,340,"--t2",52)+pines(7,390,"--t1",44));
+ let f="";for(let i=0;i<16;i++)f+=`<i class="ff" style="left:${Math.random()*100}%;top:${35+Math.random()*60}%;--x:${Math.random()*60-30}px;--y:${Math.random()*-60}px;--d:${5+Math.random()*6}s;--l:-${Math.random()*6}s"></i>`;
+ sc.insertAdjacentHTML("beforeend",f)})();
+$("#guide").innerHTML=`<div class="panel gd"><h2>📚 Panduan Guru</h2>
+<p class="goal">🎯 <b>Tujuan pembelajaran:</b> peserta didik mampu menjelaskan pengertian, ciri, struktur, serta jenis dan contoh karya ilmiah, dan mengevaluasi kelayakan sebuah tulisan sebagai karya ilmiah.</p>
+<details open><summary>🧭 Aturan pergerakan pemain</summary><ul>
+<li>Zona 1 terbuka sejak awal. Zona berikutnya terbuka jika zona sebelumnya lulus (skor ≥ 70%).</li>
+<li>Satu soal satu kesempatan. Poin: PG, Benar/Salah: penuh atau nol. PGK, seret-lepas, jodoh, dan urutan: poin sebagian sesuai ketepatan.</li>
+<li>Gagal lulus: ulangi zona setelah 2 menit diskusi kru atas soal yang keliru. Skor tertinggi yang dicatat.</li>
+<li>Bintang: 1 (≥70%), 2 (≥85%), 3 (100%). Lencana diberikan saat zona lulus.</li>
+<li>Boss Battle (Zona 4) bernilai ganda dan hanya bisa dimainkan setelah tiga lencana pertama terkumpul.</li>
+<li>Zona 5 Puncak Nalar adalah tantangan tingkat tinggi: 7 soal penalaran bernilai ganda, terbuka setelah Boss dikalahkan. Puncak Finish (skor akhir dan refleksi) muncul setelah zona ini lulus.</li><li>Gelar akhir: Laksamana Naskah (≥90%), Navigator Ilmiah (≥75%), Pelaut Muda (di bawahnya).</li></ul></details>
+<details><summary>⏱️ Alur 2 pertemuan (2 × 45 menit)</summary><div class="wide"><table>
+<tr><th>Pertemuan</th><th>Kegiatan</th><th>Menit</th></tr>
+<tr><td rowspan="4">1</td><td>Pemantik: bandingkan dua teks (opini vs hasil penelitian). Bentuk kru 4–5 orang.</td><td>8</td></tr>
+<tr><td>Zona 1 Pelabuhan Definisi + bahas jawaban</td><td>15</td></tr>
+<tr><td>Zona 2 Hutan Ciri + bahas jawaban</td><td>17</td></tr>
+<tr><td>Refleksi: tiga ciri yang paling sering terlewat</td><td>5</td></tr>
+<tr><td rowspan="4">2</td><td>Ulasan singkat dan pembukaan struktur (contoh daftar isi skripsi/jurnal)</td><td>7</td></tr>
+<tr><td>Zona 3 Gua Struktur</td><td>13</td></tr>
+<tr><td>Zona 4 Boss Battle (kru berdiskusi, lalu jawab)</td><td>17</td></tr>
+<tr><td>Penghargaan lencana dan refleksi akhir</td><td>8</td></tr></table></div></details>
+<details><summary>🎮 Cara memainkan di kelas</summary><ul><li>Zona 5 (sekitar 20 menit) cocok dikerjakan berkelompok. Jika waktu terbatas, mainkan di awal pertemuan berikutnya atau sebagai pengayaan.</li><li>Mode individual: tiap siswa memakai gawai sendiri.</li><li>Mode kru: satu gawai per kru, peran bergantian: Navigator (membaca soal), Juru Data (mencari bukti di soal), Juru Tulis (memilih jawaban), Pengawas Waktu.</li><li>Pada soal seret-lepas, ketuk kalimat lalu ketuk kotak tujuan jika layar sentuh kurang nyaman untuk menyeret.</li></ul></details>
+<details><summary>📝 Asesmen dan tindak lanjut</summary><ul><li>Catat skor per zona sebagai asesmen formatif (pengetahuan).</li><li>Tugas lanjutan: siswa menulis abstrak 100–150 kata dari satu hasil pengamatan sederhana, dinilai dengan ciri ilmiah di Zona 2.</li><li>Pengayaan: siswa membuat satu soal HOTS baru bergaya Boss Battle.</li></ul></details>
+<details><summary>🗂️ Bank soal (ringkasan)</summary><p>20 soal (Zona 5 berisi 7 soal HOTS tambahan): PG (Zona 1, Boss), PGK (Zona 1, 2, Boss), Benar/Salah (Zona 2), Seret-lepas (Zona 2), Menjodohkan (Zona 3, Boss), Mengurutkan (Zona 3). Soal tampil acak urutan opsi pada jodoh dan urutan.</p></details></div>`;
+(function(){const i=document.querySelector("#dvc img"),b=document.querySelector("#dvb");b.innerHTML='<img alt="" src="'+i.src+'">'})();
+function devT(f){const c=$("#dvc"),h=f===false?true:!c.hidden;c.hidden=h;$("#dvb").setAttribute("aria-expanded",String(!h))}
+document.addEventListener("keydown",e=>{if(e.key=="Escape")devT(false)});
+document.addEventListener("click",e=>{if(!e.target.closest("#dvc,#dvb"))devT(false)});
+map();
+</script>
+</body>
+</html>
